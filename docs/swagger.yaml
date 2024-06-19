@@ -1,0 +1,155 @@
+basePath: /
+definitions:
+  models.Costumer:
+    properties:
+      address:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:9000
+info:
+  contact:
+    name: Eduardo araujo
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Mega_api_HTTP_GRPC API Docs
+  version: 1.0.0
+paths:
+  /costumer:
+    get:
+      consumes:
+      - application/json
+      description: retorna uma lista com todos os usuarios cadastrados
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Costumer'
+            type: array
+      summary: Get todos
+      tags:
+      - List costumers
+    post:
+      consumes:
+      - application/json
+      description: Cria um novo usuario
+      parameters:
+      - description: Costumer
+        in: body
+        name: costumer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Costumer'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Costumer'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create
+      tags:
+      - Create costumer
+  /costumer/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deleta um cliente por id
+      parameters:
+      - description: Costumer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete
+      tags:
+      - costumer delete
+    get:
+      consumes:
+      - application/json
+      description: retorna apenas um cliente pelo parametro passado do id
+      parameters:
+      - description: Costumer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Costumer'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Get por id
+      tags:
+      - get costumer by id
+    put:
+      consumes:
+      - application/json
+      description: atualiza de cliente no banco de dados
+      parameters:
+      - description: Costumer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Costumer
+        in: body
+        name: costumer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Costumer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Costumer'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update
+      tags:
+      - update costumer
+swagger: "2.0"

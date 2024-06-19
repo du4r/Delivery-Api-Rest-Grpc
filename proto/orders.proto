@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+package queue;
+
+service OrderQueue {
+  rpc AddOrder (OrderRequest) returns (OrderResponse);
+  rpc GetOrder (Empty) returns (OrderResponse);
+}
+
+message Customer {
+  int64 id = 1;
+  string name = 2;
+  string address = 3;
+}
+
+message OrderRequest {
+  Customer Customer = 1;
+  string order_id = 2;
+  string title = 3;
+  float price = 4;
+}
+
+message OrderResponse {
+  Customer customer = 1;
+  string order_id = 2;
+  string title = 3;
+  float price = 4;
+}
+
+message Empty {}
